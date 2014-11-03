@@ -84,6 +84,14 @@ int main()
 		for (int i = 0; i < triangles.size(); i++) {
 			triangles[i].Move();
 			triangles[i].Bounce();
+			for (int j = 0; j < triSize; j++) {						
+				if (i != j){
+					if (CollisionManager::Instance()->DetectCollision(triangles[i], triangles[j])) {
+						triangles[i].shape.setFillColor(sf::Color::Blue);
+						triangles[j].shape.setFillColor(sf::Color::Green);
+					}
+				}
+			}
 		}
 		for (int i = 0; i < boxSize; i++) {
 			boxes[i].Move();
@@ -92,6 +100,15 @@ int main()
 				if (CollisionManager::Instance()->DetectCollision(boxes[i], triangles[j])) {
 					boxes[i].shape.setFillColor(sf::Color::Blue);
 					triangles[j].shape.setFillColor(sf::Color::Green);
+				}
+			}
+
+			for (int j = 0; j < boxSize; j++) {						
+				if (i != j){
+					if (CollisionManager::Instance()->DetectCollision(boxes[i], boxes[j])) {
+						boxes[i].shape.setFillColor(sf::Color::Blue);
+						boxes[j].shape.setFillColor(sf::Color::Green);
+					}
 				}
 			}
 		}
